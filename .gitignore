@@ -1,0 +1,37 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Generated files
+*.log
+.DS_Store
+Thumbs.db
+
+# Uploaded and processed documents
+data/uploads/*
+data/processed/*
+
+# Keep the data directories
+!data/uploads/.gitkeep
+!data/processed/.gitkeep
