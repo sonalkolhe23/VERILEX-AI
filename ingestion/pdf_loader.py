@@ -1,16 +1,21 @@
 
 from pathlib import Path
+
 import pymupdf
+
+from ingestion.ocr import OCRProcessor
 
 
 class PDFLoader:
     """
-    Extracts text and metadata from legal PDF documents.
-    Preserves page-level information for evidence citations.
+    Extracts text and metadata from legal PDFs.
+    Automatically applies OCR to scanned pages.
+    Preserves page-level information for citations.
     """
 
     def __init__(self, min_text_length=30):
         self.min_text_length = min_text_length
+        self.ocr_processor = OCRProcessor()
 
     def load(self, pdf_path):
         pdf_path = Path(pdf_path)
@@ -35,26 +40,40 @@ class PDFLoader:
 
                 metadata = document.metadata or {}
 
-                for page_number, page in enumerate(document, start=1):
-
-                    text = page.get_text("text", sort=True).strip()
+                for page_number, page in enumerate(
+                    document, start=1
+                ):
+                    text = page.get_text(
+                        "text", sort=True
+                    ).strip()
 
                     is_scanned = (
                         len(text) < self.min_text_length
                     )
+
+                    ocr_used = False
+
+                    if is_scanned:
+                        text = self.ocr_processor.extract_text(
+                            page
+                        )
+                        ocr_used = True
 
                     pages.append({
                         "page_number": page_number,
                         "text": text,
                         "character_count": len(text),
                         "is_scanned": is_scanned,
+                        "ocr_used": ocr_used,
                         "width": round(page.rect.width, 2),
                         "height": round(page.rect.height, 2)
                     })
 
                 return {
                     "document_name": pdf_path.name,
-                    "document_path": str(pdf_path.resolve()),
+                    "document_path": str(
+                        pdf_path.resolve()
+                    ),
                     "total_pages": len(pages),
                     "metadata": {
                         "title": metadata.get("title"),
