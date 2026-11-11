@@ -2,3 +2,7 @@ streamlit
 pymupdf
 python-dotenv
 pillow
+pytesseract
+sentence-transformers
+rank-bm25
+pytest
