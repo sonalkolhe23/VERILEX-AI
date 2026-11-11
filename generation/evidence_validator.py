@@ -1,13 +1,11 @@
+import re
+
 
 class EvidenceValidator:
-    """Validates citations against the evidence supplied to the model."""
+    """Validates citation indices and supporting quotes against evidence."""
 
     @staticmethod
     def validate(citation_indices, evidence):
-        """
-        Keep only citation indices that refer to existing evidence.
-        Indices are 1-based.
-        """
         if not isinstance(citation_indices, list):
             return []
 
@@ -23,3 +21,19 @@ class EvidenceValidator:
                 valid_indices.append(index)
 
         return valid_indices
+
+    @staticmethod
+    def validate_quote(quote, evidence_text):
+        """Check whether a supporting quote appears in the evidence text."""
+        if not isinstance(quote, str) or not quote.strip():
+            return False
+
+        if not isinstance(evidence_text, str):
+            return False
+
+        def normalize(value):
+            value = value.casefold()
+            value = re.sub(r"\u00ad\s*", "", value)
+            return " ".join(value.split())
+
+        return normalize(quote) in normalize(evidence_text)
