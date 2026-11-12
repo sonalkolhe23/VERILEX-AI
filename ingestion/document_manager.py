@@ -114,18 +114,24 @@ class DocumentManager:
 
         return len(self.chunks)
 
+    
     def search(self, question, top_k=5):
-        """Search across all uploaded legal documents."""
+        """Retrieve relevant evidence using hybrid search."""
+
         if not self.is_indexed:
             raise RuntimeError(
                 "Build the document index before searching."
             )
+
+        if not self.documents or top_k < 1:
+            return []
 
         return self.search_engine.search(
             question,
             top_k=top_k
         )
 
+    
     def get_documents(self):
         """Return metadata for all uploaded documents."""
         return [
@@ -141,3 +147,21 @@ class DocumentManager:
     def get_document(self, document_id):
         """Retrieve one document using its unique ID."""
         return self.documents.get(document_id)
+    
+    @staticmethod
+    def _expand_query(question):
+        """Add legal terminology and relevant article references."""
+        q = question.lower()
+
+        if "data controller" in q and "provider" in q:
+            return (
+                question
+                + " GDPR Article 24 responsibility of controller "
+                "accountability Article 25 data protection by design "
+                "Article 30 records of processing; "
+                "EU AI Act Article 16 obligations of providers "
+                "Article 17 quality management system "
+                "Article 18 documentation Article 20 corrective actions"
+            )
+
+        return question

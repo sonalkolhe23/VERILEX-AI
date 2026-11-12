@@ -1,0 +1,12 @@
+
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.git/
+.env
+*.pyc
+*.pyo
+*.log
+evaluation/results.json
+evaluation/summary.json

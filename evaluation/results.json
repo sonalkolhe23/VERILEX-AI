@@ -1,0 +1,524 @@
+[
+  {
+    "id": "F01",
+    "type": "factual",
+    "question": "What measures must providers and deployers take to ensure AI literacy?",
+    "expected_answer": "They must take measures to ensure, to the best of their extent, sufficient AI literacy among staff and other people operating or using AI systems on their behalf. Relevant factors include technical knowledge, experience, education, training, intended context, and affected persons.",
+    "answer": "Providers and deployers must take measures to ensure a sufficient level of AI literacy of their staff and other persons. [1]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 51,
+        "page_numbers": [
+          51
+        ],
+        "article": "Article 4"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 1.0,
+    "dense_retrieval_seconds": 0.016,
+    "hybrid_retrieval_seconds": 1.285,
+    "generation_seconds": 20.693,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F02",
+    "type": "factual",
+    "question": "What is the general prohibition stated in Article 5 of the EU AI Act?",
+    "expected_answer": "Article 5 prohibits the AI practices listed in that article.",
+    "answer": "The prohibition of AI practices referred to in Article 5 is general and covers all AI systems intended to be used to detect the emotional state of individuals in situations related to the workplace and education. [3]",
+    "citations": [
+      {
+        "citation_index": 3,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 12,
+        "page_numbers": [
+          12
+        ],
+        "article": null
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 0.0,
+    "citation_precision": 0.0,
+    "dense_retrieval_seconds": 0.015,
+    "hybrid_retrieval_seconds": 1.778,
+    "generation_seconds": 12.03,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F03",
+    "type": "factual",
+    "question": "What condition can prevent an Annex III AI system from being considered high-risk under Article 6(3)?",
+    "expected_answer": "It must not pose a significant risk of harm to health, safety, or fundamental rights, including by not materially influencing decision-making, and one of the listed conditions must be fulfilled.",
+    "answer": "An Annex III AI system can be considered non-high-risk if it does not pose a significant risk of harm to the health, safety or fundamental rights of natural persons, including by not materially influencing the outcome of decision making. [1]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 53,
+        "page_numbers": [
+          53,
+          54
+        ],
+        "article": "Article 6"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 0.5,
+    "dense_retrieval_seconds": 0.053,
+    "hybrid_retrieval_seconds": 1.535,
+    "generation_seconds": 11.905,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F04",
+    "type": "factual",
+    "question": "Why must high-risk AI systems be tested under Article 9?",
+    "expected_answer": "Testing identifies appropriate and targeted risk-management measures and checks consistent performance for the intended purpose and compliance with the applicable requirements.",
+    "answer": "High-risk AI systems must be tested under Article 9 to ensure they perform consistently for their intended purpose and comply with the requirements set out in this Section. [1]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 57,
+        "page_numbers": [
+          57
+        ],
+        "article": "Article 9"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 1.0,
+    "dense_retrieval_seconds": 0.01,
+    "hybrid_retrieval_seconds": 1.404,
+    "generation_seconds": 10.805,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F05",
+    "type": "factual",
+    "question": "What must high-risk AI systems technically allow under Article 12?",
+    "expected_answer": "They must technically allow automatic recording of events or logs over the system's lifetime.",
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": false,
+    "actual_abstention": true,
+    "abstention_correct": false,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.01,
+    "hybrid_retrieval_seconds": 1.458,
+    "generation_seconds": 8.61,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "F06",
+    "type": "factual",
+    "question": "What is the purpose of logging capabilities under Article 12(2)?",
+    "expected_answer": "They support traceability, identification of situations that may create risks or substantial modifications, post-market monitoring, and monitoring system operation by deployers.",
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": false,
+    "actual_abstention": true,
+    "abstention_correct": false,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.013,
+    "hybrid_retrieval_seconds": 1.544,
+    "generation_seconds": 14.281,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "F07",
+    "type": "factual",
+    "question": "What must human oversight personnel be equipped with according to Article 26(2)?",
+    "expected_answer": "They must have the necessary competence, training, authority, and support.",
+    "answer": "Human oversight personnel must be equipped with necessary competence, training, and authority. [2]",
+    "citations": [
+      {
+        "citation_index": 2,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 60,
+        "page_numbers": [
+          60
+        ],
+        "article": "Article 14"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 0.0,
+    "dense_retrieval_seconds": 0.014,
+    "hybrid_retrieval_seconds": 1.48,
+    "generation_seconds": 15.216,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F08",
+    "type": "factual",
+    "question": "What does GDPR Article 5(1)(b), the purpose limitation principle, require?",
+    "expected_answer": "Personal data must be collected for specified, explicit, and legitimate purposes and not further processed incompatibly with those purposes. Certain public-interest archiving, research, and statistical processing is treated as compatible under the stated conditions.",
+    "answer": "Personal data must be processed lawfully, fairly and transparently. (lawfulness, fairness and transparency). [1]\n\nPersonal data must be collected for specified, explicit and legitimate purposes. (purpose limitation). [1]\n\nPersonal data must be adequate, relevant and limited to what is necessary. (data minimisation). [1]\n\nPersonal data must be accurate and kept up to date where necessary. (accuracy). [1]\n\nPersonal data must be kept in an identifiable form for no longer than necessary. (storage limitation). [1]\n\nPersonal data must be processed with appropriate security. (integrity and confidentiality). [2]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "sample_legal_document.pdf",
+        "page_number": 6,
+        "page_numbers": [
+          6,
+          7
+        ],
+        "article": "Article 5"
+      },
+      {
+        "citation_index": 2,
+        "document_name": "sample_legal_document.pdf",
+        "page_number": 7,
+        "page_numbers": [
+          7
+        ],
+        "article": "Article 5"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 0.6666666666666666,
+    "dense_retrieval_seconds": 0.013,
+    "hybrid_retrieval_seconds": 1.568,
+    "generation_seconds": 15.293,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F09",
+    "type": "factual",
+    "question": "What does GDPR Article 5(1)(c), data minimisation, require?",
+    "expected_answer": "Personal data must be adequate, relevant, and limited to what is necessary for the purposes for which they are processed.",
+    "answer": "Personal data must be processed lawfully, fairly and transparently. (lawfulness, fairness and transparency). [1]\n\nPersonal data must be collected for specified, explicit and legitimate purposes. (purpose limitation). [1]\n\nPersonal data must be adequate, relevant and limited to what is necessary. (data minimisation). [1]\n\nPersonal data must be accurate and kept up to date where necessary. (accuracy). [1]\n\nPersonal data must be kept in an identifiable form for no longer than necessary. (storage limitation). [1]\n\nPersonal data must be processed with appropriate security. (integrity and confidentiality). [4]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "sample_legal_document.pdf",
+        "page_number": 6,
+        "page_numbers": [
+          6,
+          7
+        ],
+        "article": "Article 5"
+      },
+      {
+        "citation_index": 4,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 117,
+        "page_numbers": [
+          117
+        ],
+        "article": "Article 100"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 0.3333333333333333,
+    "dense_retrieval_seconds": 0.053,
+    "hybrid_retrieval_seconds": 1.678,
+    "generation_seconds": 17.601,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "F10",
+    "type": "factual",
+    "question": "When may processing rely on legitimate interests under GDPR Article 6(1)(f)?",
+    "expected_answer": "When processing is necessary for the legitimate interests of the controller or a third party, unless those interests are overridden by the data subject's interests or fundamental rights and freedoms requiring personal-data protection, particularly where the data subject is a child.",
+    "answer": "Processing may rely on legitimate interests under GDPR Article 6(1)(f) when the interests of the data subject are overridden by compelling legitimate grounds for the processing. [1]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "sample_legal_document.pdf",
+        "page_number": 7,
+        "page_numbers": [
+          7,
+          8
+        ],
+        "article": "Article 6"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "citation_precision": 0.5,
+    "dense_retrieval_seconds": 0.012,
+    "hybrid_retrieval_seconds": 1.437,
+    "generation_seconds": 14.416,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "M01",
+    "type": "multi_hop",
+    "question": "How do AI literacy obligations under the EU AI Act and GDPR purpose limitation address responsible handling of information?",
+    "expected_answer": "The AI Act requires providers and deployers to support sufficient AI literacy among people operating or using AI systems, considering their knowledge, training, and context. GDPR purpose limitation separately requires personal data to be collected for specified, explicit, legitimate purposes and restricts incompatible further processing.",
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": false,
+    "actual_abstention": true,
+    "abstention_correct": false,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 0.0,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.013,
+    "hybrid_retrieval_seconds": 1.529,
+    "generation_seconds": 12.78,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "M02",
+    "type": "multi_hop",
+    "question": "How do EU AI Act risk-management testing and GDPR data minimisation address different aspects of reducing harm?",
+    "expected_answer": "The AI Act requires testing high-risk systems to identify targeted risk-management measures and check consistent performance and compliance. GDPR data minimisation requires personal data to be adequate, relevant, and limited to what is necessary for its processing purposes.",
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": false,
+    "actual_abstention": true,
+    "abstention_correct": false,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 0.5,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.012,
+    "hybrid_retrieval_seconds": 1.741,
+    "generation_seconds": 12.876,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "M03",
+    "type": "multi_hop",
+    "question": "How do EU AI Act record-keeping and GDPR purpose limitation impose different documentation or data-handling expectations?",
+    "expected_answer": "The AI Act requires high-risk AI systems to support automatic event logging throughout their lifetime for traceability and monitoring. GDPR purpose limitation governs why personal data is collected and restricts incompatible further processing.",
+    "answer": "EU AI Act requires high-risk AI systems to keep technical documentation that includes information on the system's general characteristics, capabilities, and limitations, algorithms, data, training, testing, and validation processes. [1]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 20,
+        "page_numbers": [
+          20,
+          21
+        ],
+        "article": null
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 0.0,
+    "citation_precision": 0.0,
+    "dense_retrieval_seconds": 0.015,
+    "hybrid_retrieval_seconds": 1.655,
+    "generation_seconds": 13.718,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "M04",
+    "type": "multi_hop",
+    "question": "How do human oversight requirements in the EU AI Act relate to GDPR safeguards around processing based on legitimate interests?",
+    "expected_answer": "The AI Act requires competent, trained, authorised, and supported people to oversee high-risk AI systems. GDPR Article 6(1)(f) permits necessary processing for legitimate interests only where those interests are not overridden by the data subject's interests or fundamental rights and freedoms.",
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": false,
+    "actual_abstention": true,
+    "abstention_correct": false,
+    "dense_recall_at_5": 0.0,
+    "hybrid_recall_at_5": 0.3333333333333333,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.014,
+    "hybrid_retrieval_seconds": 2.128,
+    "generation_seconds": 22.873,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "M05",
+    "type": "multi_hop",
+    "question": "A high-risk AI system processes personal data. What distinct responsibilities arise from the AI Act's logging requirement and GDPR's data minimisation principle?",
+    "expected_answer": "The AI Act requires technical capability for automatic event logging over the system's lifetime to support traceability and monitoring. GDPR requires the personal data processed to be adequate, relevant, and limited to what is necessary for the processing purpose.",
+    "answer": "Providers of high-risk AI systems must keep logs of their operations for at least six months. [1]\n\nProviders of high-risk AI systems must maintain logs as part of the documentation required by financial services law. [1]\n\nLogging capabilities for high-risk AI systems must include recording of the period of each use of the system. [2]\n\nProviders of high-risk AI systems must ensure that the logging capabilities enable recording of events relevant for identifying situations that may result in risk. [2]",
+    "citations": [
+      {
+        "citation_index": 1,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 64,
+        "page_numbers": [
+          64
+        ],
+        "article": "Article 19"
+      },
+      {
+        "citation_index": 2,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 59,
+        "page_numbers": [
+          59
+        ],
+        "article": "Article 12"
+      }
+    ],
+    "expected_abstention": false,
+    "actual_abstention": false,
+    "abstention_correct": true,
+    "dense_recall_at_5": 0.5,
+    "hybrid_recall_at_5": 0.5,
+    "citation_precision": 0.5,
+    "dense_retrieval_seconds": 0.016,
+    "hybrid_retrieval_seconds": 1.626,
+    "generation_seconds": 16.136,
+    "generation_error": null,
+    "manual_answer_review_required": true
+  },
+  {
+    "id": "U01",
+    "type": "unanswerable",
+    "question": "What is the annual salary of the data protection officer in these documents?",
+    "expected_answer": null,
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": true,
+    "actual_abstention": true,
+    "abstention_correct": true,
+    "dense_recall_at_5": null,
+    "hybrid_recall_at_5": null,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.011,
+    "hybrid_retrieval_seconds": 0.982,
+    "generation_seconds": 12.786,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "U02",
+    "type": "unanswerable",
+    "question": "Which employee at the company is personally responsible for operating its AI system?",
+    "expected_answer": null,
+    "answer": "The AI Office is responsible for monitoring and supervising compliance of AI systems with obligations under this Regulation. [2]",
+    "citations": [
+      {
+        "citation_index": 2,
+        "document_name": "eu_ai_act.pdf",
+        "page_number": 104,
+        "page_numbers": [
+          104
+        ],
+        "article": "Article 75"
+      }
+    ],
+    "expected_abstention": true,
+    "actual_abstention": false,
+    "abstention_correct": false,
+    "dense_recall_at_5": null,
+    "hybrid_recall_at_5": null,
+    "citation_precision": 0.0,
+    "dense_retrieval_seconds": 0.02,
+    "hybrid_retrieval_seconds": 1.683,
+    "generation_seconds": 8.7,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "U03",
+    "type": "unanswerable",
+    "question": "How many GPUs were used to train the AI systems discussed in these documents?",
+    "expected_answer": null,
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": true,
+    "actual_abstention": true,
+    "abstention_correct": true,
+    "dense_recall_at_5": null,
+    "hybrid_recall_at_5": null,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.019,
+    "hybrid_retrieval_seconds": 1.477,
+    "generation_seconds": 10.552,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "U04",
+    "type": "unanswerable",
+    "question": "What was the exact date on which this company first deployed its AI system?",
+    "expected_answer": null,
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": true,
+    "actual_abstention": true,
+    "abstention_correct": true,
+    "dense_recall_at_5": null,
+    "hybrid_recall_at_5": null,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.012,
+    "hybrid_retrieval_seconds": 1.561,
+    "generation_seconds": 0.004,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  },
+  {
+    "id": "U05",
+    "type": "unanswerable",
+    "question": "What is the internal project code name of the AI system used by the organisation?",
+    "expected_answer": null,
+    "answer": "I cannot provide a reliable answer based on the available legal documents. The retrieved evidence is insufficient to support a conclusion.",
+    "citations": [],
+    "expected_abstention": true,
+    "actual_abstention": true,
+    "abstention_correct": true,
+    "dense_recall_at_5": null,
+    "hybrid_recall_at_5": null,
+    "citation_precision": null,
+    "dense_retrieval_seconds": 0.015,
+    "hybrid_retrieval_seconds": 1.453,
+    "generation_seconds": 9.984,
+    "generation_error": null,
+    "manual_answer_review_required": false
+  }
+]

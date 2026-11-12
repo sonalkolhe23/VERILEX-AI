@@ -1,0 +1,26 @@
+{
+  "total_questions": 20,
+  "question_breakdown": {
+    "factual": 10,
+    "multi_hop": 5,
+    "unanswerable": 5
+  },
+  "dense_only": {
+    "mean_recall_at_5": 0.5
+  },
+  "hybrid": {
+    "mean_recall_at_5": 0.6888888888888889
+  },
+  "mean_citation_precision": 0.45,
+  "abstention_accuracy": 0.8,
+  "mean_dense_retrieval_seconds": 0.017800000000000003,
+  "mean_hybrid_retrieval_seconds": 1.5501,
+  "mean_generation_seconds": 13.062949999999997,
+  "answer_correctness": "Requires manual review against expected_answer.",
+  "notes": [
+    "Recall@5 is calculated using annotated document/page pairs.",
+    "Citation precision checks generated citation pages against annotated evidence.",
+    "Unanswerable questions are evaluated using abstention accuracy.",
+    "Factual and multi-hop answer correctness requires manual review."
+  ]
+}

@@ -1,5 +1,7 @@
-﻿
+﻿import os
 import json
+import re
+import string
 import urllib.request
 import urllib.error
 
@@ -10,9 +12,19 @@ from generation.abstention import AbstentionHandler
 class AnswerGenerator:
     """Generates evidence-grounded answers using a local Ollama model."""
 
-    def __init__(self, model="qwen2.5:3b", base_url="http://localhost:11434"):
+    def __init__(
+        self,
+        model="qwen2.5:3b",
+        base_url=None
+    ):
         self.model = model
-        self.base_url = base_url.rstrip("/")
+        self.base_url = (
+            base_url or os.getenv(
+                "OLLAMA_BASE_URL",
+                "http://localhost:11434"
+            )
+        ).rstrip("/")
+
         self.validator = EvidenceValidator()
         self.abstention = AbstentionHandler()
 
@@ -41,9 +53,29 @@ STRICT RULES:
 5. Every claim must have its own citation indices.
 6. Only cite evidence that directly supports that claim.
 7. If a claim has no supporting evidence, do not include it.
-8. If the evidence cannot answer the question, abstain.
-9. Keep claims concise and faithful to the source.
-10. Return valid JSON only.
+8. Identify the exact information requested before answering.
+9. Evidence is sufficient only when it directly establishes the specific fact being asked.
+10. Related information is NOT proof. Do not infer an answer from a related law, responsibility, date, role, or general statement.
+11. If a question asks for a specific person's name, salary, company deployment date, or internal project name, that exact fact must appear in the evidence.
+12. Never substitute a regulatory effective date for a company's deployment date.
+13. Never substitute an organisation's responsibility for the identity of an individual employee.
+14. When a question asks for an exact calendar date, the evidence must explicitly contain that date.
+15. Phrases such as "first use", "entry into force", "application date", or "effective date" are not proof of a company's actual deployment date.
+16. Never convert a legal deadline, regulatory date, or triggering event into a specific company deployment date.
+17. If the exact date is absent, abstain.
+MULTI-DOCUMENT ANALYSIS:
+18. A question may require evidence from multiple legal documents.
+19. Examine every supplied evidence item, including items from different documents.
+20. For a question comparing two legal frameworks, identify the relevant
+    evidence for each framework separately.
+21. Create separate claims for each framework, citing the evidence
+    from its own document.
+22. Do not abstain merely because the answer requires combining evidence
+    from multiple documents.
+23. If one document supports part of the answer but the other does not,
+    provide only the supported part and do not invent the missing part.
+24. Use the document name and article metadata to distinguish sources.
+25. Never assume that two documents have identical legal obligations.
 
 CITATION AND QUOTE RULES:
 1. Evidence items are numbered [1], [2], [3], etc. Use ONLY these numbers.
@@ -70,6 +102,11 @@ ANSWER STRUCTURE:
 - If a list has six items, produce six separate claims.
 - If only some items are supported, return only those supported items.
 - If the evidence does not support a meaningful answer, return an empty claims array and abstained=true.
+MULTI-DOCUMENT OUTPUT:
+- For questions involving multiple documents, create at least one
+  separately supported claim for each document when evidence permits.
+- Cite each claim using the exact evidence index containing its quote.
+- Never combine quotes from different documents.
 
 EXAMPLE FOR LIST QUESTIONS:
 If the evidence contains:
@@ -170,7 +207,10 @@ EVIDENCE:
                 "additionalProperties": False
             },
             "stream": False,
-            "options": {"temperature": 0},
+            "options": {
+            "temperature": 0,
+            "num_predict": 800
+        },
         }
 
         request = urllib.request.Request(
@@ -195,8 +235,41 @@ EVIDENCE:
         if not evidence:
             return self._abstain()
 
+        question_lower = question.casefold()
+
+        asks_company_deployment_date = (
+            "date" in question_lower
+            and "company" in question_lower
+            and any(
+                term in question_lower
+                for term in ("deploy", "deployment", "put into service")
+            )
+        )
+
+        if asks_company_deployment_date:
+            deployment_date_supported = any(
+                self._has_explicit_date(item.get("text", ""))
+                and re.search(
+                    r"\b(company|organisation|organization)\b",
+                    item.get("text", ""),
+                    re.IGNORECASE,
+                )
+                and re.search(
+                    r"\b(deploy(?:ed|ment)?)\b",
+                    item.get("text", ""),
+                    re.IGNORECASE,
+                )
+                for item in evidence
+            )
+
+            if not deployment_date_supported:
+                return self._abstain()
+
         try:
             result = self._generate_with_ollama(question, evidence)
+            print("\n========== RAW QWEN RESPONSE ==========")
+            print(result)
+            print("=======================================\n")
             model_result = json.loads(result["message"]["content"])
             print("\n========== VERILEX DEBUG ==========")
             print("MODEL RESPONSE:")
@@ -219,7 +292,28 @@ EVIDENCE:
 
         # Backwards compatibility with the original answer format.
         return self._process_legacy_answer(model_result, evidence)
+    
+    @staticmethod
+    def _has_explicit_date(text):
+        """Check whether text contains an explicit calendar date."""
+        if not isinstance(text, str):
+            return False
 
+        patterns = [
+            r"\b\d{4}-\d{2}-\d{2}\b",
+            r"\b\d{1,2}[./]\d{1,2}[./]\d{4}\b",
+            r"\b\d{1,2}\s+"
+            r"(January|February|March|April|May|June|July|August|"
+            r"September|October|November|December)\s+\d{4}\b",
+            r"\b(January|February|March|April|May|June|July|August|"
+            r"September|October|November|December)\s+"
+            r"\d{1,2},?\s+\d{4}\b",
+        ]
+
+        return any(
+            re.search(pattern, text, re.IGNORECASE)
+            for pattern in patterns
+        )
     
     def _correct_gdpr_article5_claims(self, question, claims, evidence):
         """Build the six GDPR Article 5(1) principles from retrieved evidence."""
@@ -292,6 +386,7 @@ EVIDENCE:
     
     
     
+    
     def _process_claims(self, claims, evidence):
         if not isinstance(claims, list):
             return self._abstain()
@@ -309,47 +404,46 @@ EVIDENCE:
             if not isinstance(claim_text, str) or not claim_text.strip():
                 continue
 
+            if not isinstance(supporting_quote, str) or not supporting_quote.strip():
+                continue
+
             valid_indices = self.validator.validate(
                 claim.get("citation_indices"), evidence
             )
 
-            # Verify that the supporting quote exists in the cited evidence.
-            matching_indices = [
-                index
-                for index in valid_indices
-                if self.validator.validate_quote(
-                    supporting_quote,
-                    evidence[index - 1].get("text", "")
-                )
-            ]
+            if not valid_indices:
+                continue
 
-            # Reject claims without a matching supporting quote.
+            normalized_quote = self._normalize_quote(supporting_quote)
+
+            if not normalized_quote:
+                continue
+
+            # A quote must appear in the exact passage being cited.
+            matching_indices = []
+
+            for index in valid_indices:
+                evidence_text = evidence[index - 1].get("text", "")
+                normalized_evidence = self._normalize_quote(evidence_text)
+
+                if normalized_quote in normalized_evidence:
+                    matching_indices.append(index)
+
+            # Reject claims without a matching supporting passage.
             if not matching_indices:
-                print("\n========== CLAIM VALIDATION DEBUG ==========")
+                print("\n========== CLAIM REJECTED ==========")
                 print("CLAIM:", claim_text)
-                print("VALID CITATION INDICES:", valid_indices)
+                print("CITATION INDICES:", valid_indices)
                 print("SUPPORTING QUOTE:", repr(supporting_quote))
-
-                for index in valid_indices:
-                    evidence_text = evidence[index - 1].get("text", "")
-                    print(f"\nEVIDENCE {index} TEXT:")
-                    print(repr(evidence_text))
-                    matches = self.validator.validate_quote(
-                        supporting_quote,
-                        evidence_text
-                    )
-                    print(f"EVIDENCE {index} MATCH: {matches}")
-
-                print("============================================\n")
+                print("REASON: Quote not found in cited evidence.")
+                print("====================================\n")
                 continue
 
             citation_marker = " ".join(
                 f"[{index}]" for index in matching_indices
             )
 
-            answer_parts.append(
-                f"{claim_text.strip()} {citation_marker}"
-            )
+            answer_parts.append(f"{claim_text.strip()} {citation_marker}")
 
             for index in matching_indices:
                 if index not in used_indices:
@@ -377,6 +471,7 @@ EVIDENCE:
             "citations": citations,
             "abstained": False,
         }
+
 
     def _process_legacy_answer(self, model_result, evidence):
         answer = model_result.get("answer")
@@ -431,3 +526,18 @@ EVIDENCE:
             "citations": [],
             "abstained": True,
         }
+
+    @staticmethod
+    def _normalize_whitespace(text):
+        if not isinstance(text, str):
+            return ""
+        return " ".join(text.split())
+    
+    
+    @staticmethod
+    def _normalize_quote(text):
+        if not isinstance(text, str):
+            return ""
+        text = " ".join(text.split()).casefold()
+        text = text.translate(str.maketrans("", "", string.punctuation))
+        return " ".join(text.split())

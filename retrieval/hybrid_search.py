@@ -84,7 +84,7 @@ class HybridSearch:
             for candidate in candidates
         ]
 
-        rerank_scores = self.reranker.predict(pairs)
+        rerank_scores = self.reranker.predict(pairs, batch_size=4)
 
         for candidate, score in zip(candidates, rerank_scores):
             candidate["rerank_score"] = float(score)
